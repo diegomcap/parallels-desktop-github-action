@@ -3,7 +3,7 @@ on: [push]
 
 jobs:
   parallels-desktop:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
       - name: Pull From Catalog
@@ -13,15 +13,15 @@ jobs:
           operation: 'pull'
           username: ${{ secrets.PARALLELS_USERNAME }}
           password: ${{ secrets.PARALLELS_PASSWORD }}
-          host_url: devops.example.com
-          base_image: root:${{ secrets.CATALOG_ROOT_PASSWORD }}@catalog.example.com/mac-github-runner/v1
+          host_url: 192.168.1.184
+          base_image: root:${{ secrets.CATALOG_ROOT_PASSWORD }}@catalog.example.com/bsd-github-runner/v1
       - name: Configure Github Runner
         uses: parallels/parallels-desktop-github-action@v1
         with:
           operation: 'run'
           username: ${{ secrets.PARALLELS_USERNAME }}
           password: ${{ secrets.PARALLELS_PASSWORD }}
-          host_url: devops.example.com
+          host_url: 192.168.1.184
           machine_name: ${{ steps.pull.outputs.machine_name }}
       - name: Run Command
         run: |
@@ -33,5 +33,5 @@ jobs:
           operation: 'delete'
           username: ${{ secrets.PARALLELS_USERNAME }}
           password: ${{ secrets.PARALLELS_PASSWORD }}
-          host_url: devops.example.com
+          host_url: 192.168.1.184
           machine_name: ${{ steps.pull.outputs.machine_name }}
