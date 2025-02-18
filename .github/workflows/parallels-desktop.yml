@@ -23,6 +23,7 @@ jobs:
           password: ${{ secrets.PARALLELS_PASSWORD }}
           host_url: devops.example.com
           machine_name: ${{ steps.pull.outputs.machine_name }}
+      - name: Run Command
         run: |
           echo "Hello, World!"
       - name: Delete VM
